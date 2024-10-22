@@ -1,4 +1,5 @@
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
+from fastapi.responses import HTMLResponse
 from typing import List
 
 
@@ -36,3 +37,9 @@ async def websocket_endpoint(websocket: WebSocket, client_id: int):
     except WebSocketDisconnect:
         manager.disconnect(websocket)
         await manager.broadcast(f"Client {client_id} disconnected")
+
+
+@app.get("/")
+async def get():
+    with open("index.html") as f:
+        return HTMLResponse(f.read())
