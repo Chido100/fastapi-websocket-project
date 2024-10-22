@@ -1,4 +1,4 @@
-from fastapi import FastAPI, WebSocketDisconnect
+from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from typing import List
 
 
@@ -7,7 +7,7 @@ app = FastAPI()
 
 class ConnectionManager:
     def __init__(self):
-        self.active_connections: List[WebDocket] = []
+        self.active_connections: List[WebSocket] = []
     
     async def connect(self, websocket: WebSocket):
         await websocket.accept()
